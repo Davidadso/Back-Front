@@ -21,7 +21,7 @@ import {
 import { Button } from "@/components/ui/button";
 import { ProductForm } from "../new/product-form";
 import { SearchComponent } from "../../../components/search-component";
-
+import { ViewProduct } from "./view-component";
 async function PageList() {
   const products = await getProducts();
 
@@ -29,9 +29,9 @@ async function PageList() {
     <>
       <div>
         <h1>Listar</h1>
-        <SearchComponent/>
+        <SearchComponent />
       </div>
-      <Table>
+      <Table className="">
         <TableCaption>Lista de productos Creados </TableCaption>
         <TableHeader>
           <TableRow>
@@ -49,9 +49,23 @@ async function PageList() {
               <TableCell>{product.description}</TableCell>
 
               <TableCell className="text-right">
-                <Button className="mt-2 ml-5">Ver</Button>
+                {/* aquí esta como un model para el ver */}
                 <Dialog>
-                  <DialogTrigger>
+                  <DialogTrigger asChild>
+                    <Button className="mt-2 ml-5">Ver</Button>
+                  </DialogTrigger>
+                  <DialogContent>
+                    <DialogHeader>
+                      <DialogTitle></DialogTitle>
+                      <DialogDescription>
+                        <ViewProduct product={product} key={product.id} />
+                      </DialogDescription>
+                    </DialogHeader>
+                  </DialogContent>
+                </Dialog>
+                {/* aquí esta como un model para el editar */}
+                <Dialog>
+                  <DialogTrigger asChild>
                     <Button className="ml-5">Modificar</Button>
                   </DialogTrigger>
                   <DialogContent>
@@ -60,7 +74,7 @@ async function PageList() {
                         Editar {product.name} - ID: {product.id}{" "}
                       </DialogTitle>
                       <DialogDescription>
-                       <ProductForm product={product} key={product.id} />
+                        <ProductForm product={product} key={product.id} />
                       </DialogDescription>
                     </DialogHeader>
                   </DialogContent>

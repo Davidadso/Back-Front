@@ -41,17 +41,23 @@ export class ProductsService {
   }
 
   async findOne(id: number) {
-    const productFound = await this.prismaService.product.findUnique({
-      where: {
-        id: id,
-      },
-    });
+    try {
+      console.log('ID recibido :', id);
+      const productFound = await this.prismaService.product.findUnique({
+        where: {
+          id,
+        },
+      });
 
-    if (!productFound) {
-      throw new NotFoundException(`product with id ${id} not found`);
+      if (!productFound) {
+        throw new NotFoundException(`product with id ${id} not found`);
+      }
+
+      return await productFound;
+    } catch (error) {
+      console.error(error)
+      throw new NotFoundException(`not found product with id ${id}`);
     }
-
-    return productFound;
   }
 
   async update(id: number, updateProductDto: UpdateProductDto) {
@@ -86,12 +92,12 @@ export class ProductsService {
     return deletedProduct;
   }
 
-  async Search(query: string) {
+  async searchAutocomplete(value: string) {
     try {
       return await this.prismaService.product.findMany({
         where: {
           name: {
-            contains: query,
+            contains: value,
           },
         },
         select: {

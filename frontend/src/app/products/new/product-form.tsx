@@ -40,7 +40,7 @@ export function ProductForm({ product }: any) {
       });
     }
 
-    router.push("/");
+    router.push("/products");
     router.refresh();
   });
 

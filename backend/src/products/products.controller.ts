@@ -7,7 +7,6 @@ import {
   Param,
   Delete,
   NotFoundException,
-  Search,
   Query,
   HttpException,
   HttpStatus,
@@ -15,8 +14,7 @@ import {
 import { ProductsService } from './products.service';
 import { CreateProductDto } from './dto/create-product.dto';
 import { UpdateProductDto } from './dto/update-product.dto';
-import { ApiOperation, ApiResponse, ApiTags } from '@nestjs/swagger';
-import { query } from 'express';
+import { ApiOperation, ApiTags } from '@nestjs/swagger';
 
 @ApiTags('products')
 @Controller('products')
@@ -66,13 +64,13 @@ export class ProductsController {
   }
 
   @Get('search')
-  async Search(@Query('query') query: string) {
-    if (!query || query === '') {
+  async searchProducts(@Query('value') value: string) {
+    if (!value || value === '') {
       throw new HttpException(
-        'No se Encuentra Parametro de Busqueda.',
+        'No se Encuentra Parámetro de Búsqueda.',
         HttpStatus.BAD_REQUEST,
       );
     }
-    return await this.productsService.Search(query);
+    return await this.productsService.searchAutocomplete(value);
   }
 }

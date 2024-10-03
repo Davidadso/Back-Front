@@ -1,35 +1,34 @@
 import Link from "next/link";
 import { buttonVariants } from "@/components/ui/button";
-import { getProducts } from "./products/products.api";
-import { ProductCard } from "@/components/product-card";
-import { UserDto } from "@/app/products/dto/create-product.dto";
+import { SheetDemo } from "@/components/sidebar-components";
 
 export const dynamic = "force-dynamic";
 
 async function HomePage() {
-  const products = await getProducts();
 
   return (
     <>
-      <div className="flex justify-between">
-        <h1 className="text-4xl font-bold">NextNestApp</h1>
+      <div className="flex">
+         <div className="flex items-left h-screen">
+          <SheetDemo />
+        </div>
 
-        <Link href="/products/List" className={buttonVariants()}>
-          {" "}
-          Listar Datos
-        </Link>
-
-        <Link href="/products/new" className={buttonVariants()}>
-          Create Product
-        </Link>
-      </div>
-
-      <div className="grid sm:grid-cols-2 md:grid-cols-3 xl:grid-cols-4 gap-3 container mx-auto pt-10">
-        {products.map((product: UserDto) => (
-          <ProductCard product={product} key={product.id} />
-        ))}
+        <div className="flex-1 p-4">
+          <div className="flex justify-between mb-4">
+            <h1 className="text-4xl font-bold">NextNestApp</h1>
+            <div className="flex space-x-4">
+              <Link href="#" className={buttonVariants()}>
+                Ver Categorias
+              </Link>
+              <Link href="/products/" className={buttonVariants()}>
+                Ver Productos
+              </Link>
+            </div>
+          </div>
+        </div>
       </div>
     </>
   );
 }
+
 export default HomePage;
