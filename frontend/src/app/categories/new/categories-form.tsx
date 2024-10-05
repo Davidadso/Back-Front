@@ -4,7 +4,7 @@ import { Label } from "@/components/ui/label";
 import { Button } from "@/components/ui/button";
 import { useForm } from "react-hook-form";
 
-function CategoriesForm() {
+export function CategoriesForm() {
   const { register, handleSubmit } = useForm();
   const onSubmit = handleSubmit((data) => {
     console.log(data);
@@ -19,4 +19,3 @@ function CategoriesForm() {
   );
 }
 
-export default CategoriesForm;

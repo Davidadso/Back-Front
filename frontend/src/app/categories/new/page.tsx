@@ -1,16 +1,11 @@
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 
 import React from "react";
-import { useForm } from "react-hook-form";
-
+import { CategoriesForm } from "./categories-form";
 
 
 
 function HomePage() {
-
-   
-
-    const 
   return (
     <>
       <div>
@@ -21,7 +16,7 @@ function HomePage() {
                 </CardTitle>
             </CardHeader>
             <CardContent>
-                
+            <CategoriesForm/>
             </CardContent>
         </Card>
       </div>
