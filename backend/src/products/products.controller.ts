@@ -23,8 +23,8 @@ export class ProductsController {
 
   @Post()
   @ApiOperation({ summary: 'Create a product' })
-  create(@Body() createProductDto: CreateProductDto) {
-    return this.productsService.create(createProductDto);
+  async create(@Body() createProductDto: CreateProductDto) {
+    return await this.productsService.create(createProductDto);
   }
 
   @Get()
@@ -45,9 +45,9 @@ export class ProductsController {
   }
 
   @Get(':id')
-  findOne(@Param('id') id: string) {
+  async findOne(@Param('id') id: string) {
     console.log(`${id}`);
-    return this.productsService.findOne(+id);
+    return await this.productsService.findOne(+id);
   }
 
   @Patch(':id')
@@ -59,8 +59,8 @@ export class ProductsController {
   }
 
   @Delete(':id')
-  remove(@Param('id') id: string) {
-    return this.productsService.remove(+id);
+  async remove(@Param('id') id: string) {
+    return await this.productsService.remove(+id);
   }
 
   @Get('search')

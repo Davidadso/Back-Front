@@ -1,12 +1,11 @@
-import axios from "axios";
 export const BACKEND_URL = process.env.NEXT_PUBLIC_BACKEND_URL;
 
 export async function getProducts(): Promise<any> {
   try {
-    const data = await axios.get(`${BACKEND_URL}/api/products`, {
+    const data = await fetch(`${BACKEND_URL}/api/products`, {
       cache: "no-store",
     });
-    return await data.data;
+    return await data.json();
   } catch (error) {
     console.error(error);
     return [];

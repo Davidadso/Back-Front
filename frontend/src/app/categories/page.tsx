@@ -8,22 +8,28 @@ async function HomePage() {
   return (
     <>
       <div className="flex">
-        <div className="flex items-left h-screen">
+        <div className="flex items-center h-screen">
           <SheetDemo />
         </div>
 
         <div className="flex-1 p-4">
           <div className="flex justify-between mb-4">
-            <h1 className="text-4xl font-bold">NextNestApp</h1>
+            <h1 className="text-4xl font-bold">Categorías</h1>
             <div className="flex space-x-4">
-              <Link href="/categories/" className={buttonVariants()}>
-                Ver Categorias
+              <Link href="#" className={buttonVariants()}>
+                Listar Categorías
               </Link>
-              <Link href="/products/" className={buttonVariants()}>
-                Ver Productos
+              <Link href="/categories/new/" className={buttonVariants()}>
+                Crear Categoría de Productos
               </Link>
             </div>
           </div>
+
+          {/* <div className="grid sm:grid-cols-2 md:grid-cols-3 xl:grid-cols-4 gap-3">
+            {products.map((product: UserDto) => (
+              <ProductCard product={product} key={product.id} />
+            ))}
+          </div> */}
         </div>
       </div>
     </>
