@@ -6,40 +6,91 @@ import {
   Patch,
   Param,
   Delete,
+  NotFoundException,
 } from '@nestjs/common';
 import { CategoriesService } from './categories.service';
-import { CreateCategoryDto } from './dto/create-category.dto';
-import { UpdateCategoryDto } from './dto/update-category.dto';
+import { CreateCategoriesDto } from './dto/create-category.dto';
+import { UpdateCategoriesDto } from './dto/update-category.dto';
 
 @Controller('categories')
 export class CategoriesController {
   constructor(private readonly categoriesService: CategoriesService) {}
 
   @Post()
-  create(@Body() createCategoryDto: CreateCategoryDto) {
-    return this.categoriesService.create(createCategoryDto);
+  async create(@Body() createCategoriesDto: CreateCategoriesDto) {
+    try {
+      return await this.categoriesService.create(createCategoriesDto);
+    } catch (error) {
+      console.log(error);
+      return [];
+    }
   }
 
   @Get()
-  findAll() {
-    return this.categoriesService.findAll();
+  async findAll() {
+    try {
+      const categoriesFound = await this.categoriesService.findAll();
+      if (!categoriesFound) {
+        throw new NotFoundException(
+          `Categories with id ${categoriesFound} not found`,
+        );
+      } else {
+        return categoriesFound;
+      }
+    } catch (error) {
+      console.error(error);
+      return [];
+    }
   }
 
   @Get(':id')
-  findOne(@Param('id') id: string) {
-    return this.categoriesService.findOne(+id);
+  async findOne(@Param('id') id: string) {
+    try {
+      const categoriesFound = await this.categoriesService.findOne(+id);
+      if (!categoriesFound) {
+        throw new NotFoundException(`Categories with ${id} Not Found`);
+      } else {
+        return categoriesFound;
+      }
+    } catch (error) {
+      console.error(error);
+      return [];
+    }
   }
 
   @Patch(':id')
-  update(
+  async update(
     @Param('id') id: string,
-    @Body() updateCategoryDto: UpdateCategoryDto,
+    @Body() updateCategoriesDto: UpdateCategoriesDto,
   ) {
-    return this.categoriesService.update(+id, updateCategoryDto);
+    try {
+      const categoriesFound = await this.categoriesService.update(
+        +id,
+        updateCategoriesDto,
+      );
+      if (!categoriesFound) {
+        throw new NotFoundException(`Categories with ${+id} Not Found`);
+      } else {
+        return categoriesFound;
+      }
+    } catch (error) {
+      console.error(error);
+      return [];
+    }
   }
 
   @Delete(':id')
-  remove(@Param('id') id: string) {
-    return this.categoriesService.remove(+id);
+  async remove(@Param('id') id: string) {
+    try {
+      const categoriesFound = await this.categoriesService.remove(+id);
+      if (!categoriesFound) {
+        throw new NotFoundException(`Categories with ${+id} Not Found`);
+      } else {
+        return categoriesFound;
+      }
+    } catch (error) {
+      console.error(error);
+      return [];
+    }
   }
 }

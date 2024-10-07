@@ -1,7 +1,7 @@
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 
 import React from "react";
-import { CategoriesForm } from "./categories-form";
+import { SupplierForm } from "./supplier-form";
 
 
 
@@ -12,11 +12,11 @@ function HomePage() {
         <Card>
             <CardHeader>
                 <CardTitle>
-                    Creación de las Categorías
+                    Creación de los Proveedores
                 </CardTitle>
             </CardHeader>
             <CardContent>
-            <CategoriesForm/>
+            <SupplierForm/>
             </CardContent>
         </Card>
       </div>

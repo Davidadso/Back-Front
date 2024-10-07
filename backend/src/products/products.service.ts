@@ -55,7 +55,7 @@ export class ProductsService {
 
       return await productFound;
     } catch (error) {
-      console.error(error)
+      console.error(error);
       throw new NotFoundException(`not found product with id ${id}`);
     }
   }
