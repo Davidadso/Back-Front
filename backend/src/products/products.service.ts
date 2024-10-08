@@ -11,7 +11,7 @@ import { Prisma } from '@prisma/client';
 
 @Injectable()
 export class ProductsService {
-  constructor(private prismaService: PrismaService) {}
+  constructor(private prismaService: PrismaService) { }
 
   async create(createProductDto: CreateProductDto) {
     try {
@@ -45,7 +45,7 @@ export class ProductsService {
       console.log('ID recibido :', id);
       const productFound = await this.prismaService.product.findUnique({
         where: {
-          id,
+          id: id,
         },
       });
 

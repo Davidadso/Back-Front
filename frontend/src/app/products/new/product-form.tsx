@@ -6,6 +6,7 @@ import { Label } from "@/components/ui/label";
 import { useForm } from "react-hook-form";
 import { createProduct, updateProduct } from "../products.api";
 import { useParams, useRouter } from "next/navigation";
+import { getCategories } from "@/app/categories/categories.api"
 
 export function ProductForm({ product }: any) {
   const { register, handleSubmit } = useForm({
@@ -13,30 +14,33 @@ export function ProductForm({ product }: any) {
       name: product?.name,
       description: product?.description,
       price: product?.price,
+      stock: product?.stock,
       image: product?.image,
     },
   });
   const router = useRouter();
   const params = useParams<{ id: string }>();
-  console.log(params);
-
+  const categorias = getCategories();
   const onSubmit = handleSubmit(async (data) => {
     if (product?.id) {
       const res = await updateProduct(product.id, {
         ...data,
         price: parseFloat(data.price),
+        stock: parseInt(data.stock),
       });
       console.log(res);
     } else if (params?.id) {
       const res = await updateProduct(params.id, {
         ...data,
         price: parseFloat(data.price),
+        stock: parseInt(data.stock),
       });
       console.log(res);
     } else {
       await createProduct({
         ...data,
         price: parseFloat(data.price),
+        stock: parseInt(data.stock),
       });
     }
 
@@ -51,6 +55,9 @@ export function ProductForm({ product }: any) {
 
       <Label>Description</Label>
       <Input {...register("description")} />
+
+      <Label>Cuantos</Label>
+      <Input {...register("stock")} />
 
       <Label>Price</Label>
       <Input {...register("price")} />

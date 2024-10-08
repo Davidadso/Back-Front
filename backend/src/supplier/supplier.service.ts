@@ -26,9 +26,9 @@ export class SupplierService {
     try {
       const supplierFound = this.prismaService.supplier.findMany();
       if (!supplierFound) {
-        throw new Error('Supplier not found');
+        throw new Error('Supplier not found my friend');
       } else {
-        return [];
+        return supplierFound;
       }
     } catch (error) {
       console.error(error);

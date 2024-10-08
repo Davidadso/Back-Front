@@ -15,11 +15,13 @@ model Product {
   name         String
   description  String?
   price        Float?
-  image        String?
   stock        Int
+  image        String?
   createdAt    DateTime       @default(now())
   updatedAt    DateTime       @updatedAt
   orderDetails OrderDetails[]
+  categoryId   Int?
+  category     Categories?    @relation(fields: [categoryId], references: [id])
 }
 
 model Supplier {
@@ -44,9 +46,10 @@ model OrderDetails {
 }
 
 model Categories {
-  id          Int      @id @default(autoincrement())
+  id          Int       @id @default(autoincrement())
   name        String
   description String?
-  createdAt   DateTime @default(now())
-  updatedAt   DateTime @updatedAt
+  createdAt   DateTime  @default(now())
+  updatedAt   DateTime  @updatedAt
+  Product     Product[]
 }

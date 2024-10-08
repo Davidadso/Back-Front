@@ -1,6 +1,6 @@
 export const BACKEND_URL = process.env.NEXT_PUBLIC_BACKEND_URL;
 
-export async function createCategories(supplierData: any) {
+export async function createSupplier(supplierData: any) {
   try {
     const res = await fetch(`${BACKEND_URL}/api/supplier`, {
       method: "POST",

@@ -31,13 +31,12 @@ export class SupplierController {
       return [];
     }
   }
-
   @Get()
   async findAll() {
     try {
       const supplierFound = await this.supplierService.findAll();
       if (!supplierFound) {
-        throw new Error(`Suppliers Not Found`);
+        throw new Error(`Suppliers Not Found my friend`);
       } else {
         return supplierFound;
       }
@@ -86,7 +85,7 @@ export class SupplierController {
   @Delete(':id')
   async remove(@Param('id') id: string) {
     try {
-      const supplierFound = await this.supplierService.findOne(+id);
+      const supplierFound = await this.supplierService.remove(+id);
       if (!supplierFound) {
         throw new NotFoundException(`Supplier With ${+id} Not Found`);
       } else {

@@ -6,7 +6,9 @@ import {
   SheetTitle,
   SheetTrigger,
 } from "@/components/ui/sheet";
-import { Button } from "./ui/button";
+import { Button, buttonVariants } from "./ui/button";
+import Link from "next/link";
+
 
 export function SheetDemo() {
   return (
@@ -19,10 +21,11 @@ export function SheetDemo() {
         </div>
         <SheetContent>
           <SheetHeader>
-            <SheetTitle>Are you absolutely sure?</SheetTitle>
+            <SheetTitle>Inicio</SheetTitle>
             <SheetDescription>
-              This action cannot be undone. This will permanently delete your
-              account and remove your data from our servers.
+              <Link href="/" className={buttonVariants()}>
+                Inicio
+              </Link>
             </SheetDescription>
           </SheetHeader>
         </SheetContent>

@@ -1,7 +1,7 @@
 import Link from "next/link";
 import { buttonVariants } from "@/components/ui/button";
 import { getProducts } from "./products.api";
-import { ProductCard } from "@/components/product-card";
+import { ProductCard } from "@/app/products/components/product-card";
 import { UserDto } from "@/app/products/dto/create-product.dto";
 import { SheetDemo } from "@/components/sidebar-components";
 

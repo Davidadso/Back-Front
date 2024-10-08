@@ -1,25 +1,31 @@
-"use client"
+"use client";
 import React from "react";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { Button } from "@/components/ui/button";
-import { useForm} from "react-hook-form";
-import {createCategories} from "../supplier.api"
-import {useRouter} from "next/navigation";
+import { useForm } from "react-hook-form";
+import { createSupplier, updateSupplier } from "../supplier.api";
+import { useRouter } from "next/navigation";
 
-export function SupplierForm() {
-  const { register, handleSubmit } = useForm();
-
-  const router = useRouter();
-
-  const onSubmit = handleSubmit(async (data) => {
-    await createCategories(data)
-    console.log(data);
-    router.refresh();
-    router.push("/supplier")
+export function SupplierForm({ supplier }) {
+  const { register, handleSubmit } = useForm({
+    defaultValues: {
+      name: supplier?.name,
+      contactInfo: supplier?.contactInfo,
+    },
   });
- 
-  
+  const router = useRouter();
+  const onSubmit = handleSubmit(async (data) => {
+    if (supplier?.id) {
+      const res = await updateSupplier(supplier.id, data);
+      console.log(res);
+      router.refresh();
+      router.push("/supplier");
+      router.refresh();
+    } else {
+      await createSupplier(data);
+    }
+  });
 
   return (
     <form onSubmit={onSubmit}>
@@ -27,8 +33,7 @@ export function SupplierForm() {
       <Input {...register("name")} />
       <Label>Contacto</Label>
       <Input {...register("contactInfo")} />
-      <Button>Enviar</Button>
+      <Button>{supplier.id ? "Actualizar Proveedor" : "Create Product"}</Button>
     </form>
   );
 }
-
