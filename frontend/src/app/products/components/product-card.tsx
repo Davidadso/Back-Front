@@ -34,7 +34,7 @@ export function ProductCard({ product }: any) {
       </CardHeader>
       <img src={product.image} alt="" />
       <CardContent>
-        <p>{product.description}</p>
+        <p><b>Cuantos:</b> {product.stock}</p>
       </CardContent>
       <CardFooter className="flex justify-between">
         <Button

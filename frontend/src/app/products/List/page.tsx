@@ -36,8 +36,10 @@ async function PageList() {
         <TableHeader>
           <TableRow>
             <TableHead>Nombre</TableHead>
-            <TableHead>Precio</TableHead>
             <TableHead>Descripción</TableHead>
+            <TableHead>Precio</TableHead>
+            <TableHead>Stock</TableHead>
+
             <TableHead className="text-right">Acciones</TableHead>
           </TableRow>
         </TableHeader>
@@ -45,8 +47,9 @@ async function PageList() {
           {products.map((product: UserDto) => (
             <TableRow key={product.id}>
               <TableCell className="font-medium">{product.name}</TableCell>
-              <TableCell>{product.price}</TableCell>
               <TableCell>{product.description}</TableCell>
+              <TableCell>${product.price}</TableCell>
+              <TableCell>{product.stock}</TableCell>
 
               <TableCell className="text-right">
                 {/* aquí esta como un model para el ver */}

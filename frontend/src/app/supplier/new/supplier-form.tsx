@@ -24,6 +24,7 @@ export function SupplierForm({ supplier }) {
       router.refresh();
     } else {
       await createSupplier(data);
+      router.push("/supplier");
     }
   });
 
@@ -33,7 +34,7 @@ export function SupplierForm({ supplier }) {
       <Input {...register("name")} />
       <Label>Contacto</Label>
       <Input {...register("contactInfo")} />
-      <Button>{supplier.id ? "Actualizar Proveedor" : "Create Product"}</Button>
+      <Button>{supplier?.id? "Actualizar Proveedor" : "Create Product"}</Button>
     </form>
   );
 }

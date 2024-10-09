@@ -13,14 +13,28 @@ export class UserDto {
   @IsNumber()
   price: number;
 
+  @IsNumber()
+  stock: number;
+
   @IsString()
   image: string;
 
-  constructor(id: number, name: string, description: string, price: number, image: string) {
+  @IsNumber()
+  categoryId: number;
+
+  constructor(
+    id: number,
+    name: string,
+    description: string,
+    price: number,
+    image: string
+  ) {
     this.id = id;
     this.name = name;
     this.description = description;
     this.price = price;
+    this.stock = stock;
     this.image = image;
+    this.categoryId = categoryId;
   }
 }

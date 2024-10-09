@@ -1,10 +1,14 @@
 import Link from "next/link";
 import { buttonVariants } from "@/components/ui/button";
 import { SheetDemo } from "@/components/sidebar-components";
+import {getCategories} from "./categories.api"
+import {UserDto} from "./dto/create-categories.dto"
+import { CategoriesCard } from ".//components/categories-card"
 
 export const dynamic = "force-dynamic";
 
 async function HomePage() {
+  const categorías = await getCategories();
   return (
     <>
       <div className="flex">
@@ -25,11 +29,11 @@ async function HomePage() {
             </div>
           </div>
 
-          {/* <div className="grid sm:grid-cols-2 md:grid-cols-3 xl:grid-cols-4 gap-3">
-            {products.map((product: UserDto) => (
-              <ProductCard product={product} key={product.id} />
+          <div className="grid sm:grid-cols-2 md:grid-cols-3 xl:grid-cols-4 gap-3">
+            {categorías.map((categoría: UserDto) => (
+              <CategoriesCard categoría={categoría} key={categoría.id} />
             ))}
-          </div> */}
+          </div>
         </div>
       </div>
     </>
