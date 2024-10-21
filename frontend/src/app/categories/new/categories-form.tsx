@@ -25,6 +25,7 @@ export function CategoriesForm({ categoría }) {
       router.refresh();
     } else {
       await createCategories(data);
+      router.push("/categories");
     }
   });
 
@@ -35,7 +36,7 @@ export function CategoriesForm({ categoría }) {
       <Label>Description</Label>
       <Input {...register("description")} />
       <Button>
-        {categoría.id ? "Actualizar Categoría" : "Crear Categoría"}
+        {categoría?.id ? "Actualizar Categoría" : "Crear Categoría"}
       </Button>
     </form>
   );

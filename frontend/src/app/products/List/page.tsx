@@ -1,5 +1,6 @@
 import React from "react";
 import { getProducts } from "../products.api";
+import { useState , useEffect } from "react"
 import {
   Table,
   TableBody,
