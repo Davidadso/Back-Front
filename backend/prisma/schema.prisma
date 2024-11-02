@@ -53,3 +53,31 @@ model Categories {
   updatedAt   DateTime  @updatedAt
   Product     Product[]
 }
+
+model User {
+  id        Int        @id @default(autoincrement())
+  email     String     @unique
+  userName  String     @unique
+  password  String
+  createdAt DateTime   @default(now())
+  updatedAt DateTime   @updatedAt
+  roles     UserRole[]
+}
+
+model Rol {
+  id          Int        @id @default(autoincrement())
+  name        String     @unique
+  description String?
+  createdAt   DateTime   @default(now())
+  updatedAt   DateTime   @updatedAt
+  users       UserRole[]
+}
+
+model UserRole {
+  userId Int
+  rolId  Int
+  user   User @relation(fields: [userId], references: [id])
+  rol    Rol  @relation(fields: [rolId], references: [id])
+
+  @@id([userId, rolId])
+}
