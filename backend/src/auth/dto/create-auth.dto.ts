@@ -1,5 +1,5 @@
 import { Transform } from "class-transformer";
-import { ArrayNotEmpty, IsArray, IsEmail, IsString, MinLength } from "class-validator";
+import { ArrayNotEmpty, IsArray, IsEmail, IsNumber, IsString, MinLength } from "class-validator";
 
 export class RegisterDto {
 
@@ -15,9 +15,8 @@ export class RegisterDto {
     password: string;
 
 
-    @Transform(({value}) => value.trim())
-    @IsArray()
-    @ArrayNotEmpty()
-    @MinLength(6)
-    roles: string[];  
+  
+    @MinLength(1)
+    @IsNumber()
+    id_rol: number;  
 }

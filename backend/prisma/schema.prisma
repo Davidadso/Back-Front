@@ -55,29 +55,21 @@ model Categories {
 }
 
 model User {
-  id        Int        @id @default(autoincrement())
-  email     String     @unique
-  userName  String     @unique
+  id        Int      @id @default(autoincrement())
+  email     String   @unique
+  userName  String   @unique
   password  String
-  createdAt DateTime   @default(now())
-  updatedAt DateTime   @updatedAt
-  roles     UserRole[]
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+  id_rol   Int
+  rol       Rol      @relation(fields: [id_rol], references: [id], name: "userRole")
 }
 
 model Rol {
-  id          Int        @id @default(autoincrement())
-  name        String     @unique
+  id          Int      @id @default(autoincrement())
+  name        String   @unique
   description String?
-  createdAt   DateTime   @default(now())
-  updatedAt   DateTime   @updatedAt
-  users       UserRole[]
-}
-
-model UserRole {
-  userId Int
-  rolId  Int
-  user   User @relation(fields: [userId], references: [id])
-  rol    Rol  @relation(fields: [rolId], references: [id])
-
-  @@id([userId, rolId])
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+  User User[] @relation("userRole")
 }

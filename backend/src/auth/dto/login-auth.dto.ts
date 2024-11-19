@@ -1,5 +1,5 @@
 import { Transform } from "class-transformer";
-import { ArrayNotEmpty, IsArray, IsEmail, IsString, MinLength } from "class-validator";
+import { ArrayNotEmpty, IsArray, IsEmail, IsNumber, IsString, MinLength } from "class-validator";
 
 export class LoginDto {
 
@@ -14,4 +14,9 @@ export class LoginDto {
     @MinLength(6)
     password: string;
 
+
+
+    @MinLength(1)
+    @IsNumber()
+    id_rol: number;  
 }

@@ -1,6 +1,8 @@
 import {
   BadRequestException,
   Injectable,
+  InternalServerErrorException,
+  NotFoundException,
   UnauthorizedException,
 } from '@nestjs/common';
 import { UsersService } from 'src/users/users.service';
@@ -13,20 +15,30 @@ import { JwtService } from '@nestjs/jwt';
 export class AuthService {
   constructor(
     private readonly usersService: UsersService,
-    private  readonly jwtService: JwtService,
-
+    private readonly jwtService: JwtService,
   ) {}
 
-  async register({ userName, email, password }: RegisterDto) {
+  async register({ userName, email, password, id_rol }: RegisterDto) {
     const user = await this.usersService.findOneByEmail(email);
     if (user) {
       throw new BadRequestException('User already exists');
-    } else {
-      return this.usersService.create({
+    }
+
+    if (!id_rol) {
+      id_rol = 2; 
+    }
+
+    try {
+      const hashedPassword = bcryptjs.hashSync(password, 10);
+      return await this.usersService.create({
         userName,
         email,
-        password: bcryptjs.hashSync(password, 10),
+        id_rol,
+        password: hashedPassword,
       });
+    } catch (error) {
+      console.error(error);
+      throw new InternalServerErrorException('Error al registrar el usuario');
     }
   }
 
@@ -40,14 +52,27 @@ export class AuthService {
       throw new UnauthorizedException('password is wrong');
     }
 
-
-    const  payload = { email : user.email, userName  : user.userName};
+    const payload = {
+      email: user.email,
+      userName: user.userName,
+      id_rol: user.id_rol,
+      password: user.password,
+    };
 
     const token = await this.jwtService.signAsync(payload);
 
     return {
       token,
-      email
+      email,
+    };
+  }
+
+  async profile({ email, id_rol }: { email: string; id_rol: number }) {
+    if (id_rol == 2) {
+      throw new UnauthorizedException(
+        'You are not authorized to access this route',
+      );
     }
+    return await this.usersService.findOneByEmail(email);
   }
 }

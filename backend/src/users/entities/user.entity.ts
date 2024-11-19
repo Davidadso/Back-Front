@@ -1,4 +1,3 @@
-import { UserRole } from "@prisma/client";
 
 export class User {
     id: number;
@@ -7,6 +6,6 @@ export class User {
     password: string;
     createdAt: Date;
     updatedAt: Date;
-    roles?: UserRole[]; 
+    id_rol?: number; 
 }
 
