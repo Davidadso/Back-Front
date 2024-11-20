@@ -2,7 +2,6 @@ import { Injectable, NotFoundException } from '@nestjs/common';
 import { CreateUserDto } from './dto/create-user.dto';
 import { UpdateUserDto } from './dto/update-user.dto';
 import { PrismaService } from 'src/prisma/prisma.service';
-import { User } from './entities/user.entity';
 @Injectable()
 export class UsersService {
   constructor(private prismaService: PrismaService) {}
@@ -23,16 +22,22 @@ export class UsersService {
     }
   }
   
-  async findOneByEmail(email: string): Promise<User | null> {
+  async findOneByEmail(email: string): Promise<CreateUserDto | null> {
     const user = await this.prismaService.user.findUnique({
       where: { email },
     });
     return user;
   }
 
+  async findOneByEmailWithPassword(email: string): Promise<CreateUserDto | null> {
+    return this.prismaService.user.findUnique({
+      where: { email }
+    });
+  }
+
   async findAll() {
     try {
-      const findUser = await this.prismaService.user.findMany;
+      const findUser = await this.prismaService.user.findMany();
       if (!findUser) {
         throw new Error('Error finding user');
       } else {

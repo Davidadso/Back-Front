@@ -2,7 +2,7 @@ export const BACKEND_URL = process.env.NEXT_PUBLIC_BACKEND_URL;
 
 export async function getProducts(): Promise<any> {
   try {
-    const data = await fetch(`${BACKEND_URL}/api/products`, {
+    const data = await fetch(`${BACKEND_URL}/products`, {
       cache: "no-store",
     });
     return await data.json();
@@ -14,7 +14,7 @@ export async function getProducts(): Promise<any> {
 
 export async function getProduct(id: string) {
   try {
-    const data = await fetch(`${BACKEND_URL}/api/products/${id}`, {
+    const data = await fetch(`${BACKEND_URL}/products/${id}`, {
       cache: "no-store",
     });
     return await data.json();
@@ -26,7 +26,7 @@ export async function getProduct(id: string) {
 
 export async function createProduct(productData: any) {
   try {
-    const res = await fetch(`${BACKEND_URL}/api/products`, {
+    const res = await fetch(`${BACKEND_URL}/products`, {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
@@ -42,14 +42,14 @@ export async function createProduct(productData: any) {
 }
 
 export async function deleteProduct(id: string) {
-  const res = await fetch(`${BACKEND_URL}/api/products/${id}`, {
+  const res = await fetch(`${BACKEND_URL}/products/${id}`, {
     method: "DELETE",
   });
   return await res.json();
 }
 
 export async function updateProduct(id: string, newProduct: any) {
-  const res = await fetch(`${BACKEND_URL}/api/products/${id}`, {
+  const res = await fetch(`${BACKEND_URL}/products/${id}`, {
     method: "PATCH",
     headers: {
       "Content-Type": "application/json",
@@ -63,7 +63,7 @@ export async function updateProduct(id: string, newProduct: any) {
 export async function SearchProduct(query: string) {
   try {
     const res = await fetch(
-      `${BACKEND_URL}/api/products/search?query=${query}`
+      `${BACKEND_URL}/products/search?query=${query}`
     );
 
     if (!res.ok) {

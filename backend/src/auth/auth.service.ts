@@ -25,7 +25,7 @@ export class AuthService {
     }
 
     if (!id_rol) {
-      id_rol = 2; 
+      id_rol = 2;
     }
 
     try {
@@ -68,11 +68,11 @@ export class AuthService {
   }
 
   async profile({ email, id_rol }: { email: string; id_rol: number }) {
-    if (id_rol == 2) {
+    /* if (id_rol == 2) {
       throw new UnauthorizedException(
         'You are not authorized to access this route',
       );
-    }
+    } */
     return await this.usersService.findOneByEmail(email);
   }
 }
