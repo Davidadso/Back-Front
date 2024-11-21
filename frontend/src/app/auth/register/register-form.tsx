@@ -5,7 +5,7 @@ import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { Button } from "@/components/ui/button";
 import { useRouter } from "next/navigation";
-import { registerUser } from "../component/register.api"; 
+import { registerUser } from "../component/register-login-api"; 
 
 export function RegisterForm() {
   const { register, handleSubmit, formState: { errors }, watch } = useForm();  
@@ -17,8 +17,7 @@ export function RegisterForm() {
      
       await registerUser(data);
       
-      
-      router.push("/login");
+      router.push("/");
     } catch (error) {
       setError(error.message || 'Hubo un error en el registro.');
     }

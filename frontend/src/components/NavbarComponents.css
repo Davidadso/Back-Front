@@ -1,0 +1,130 @@
+/* Navbar contenedor principal */
+.navbar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 15px 30px;
+  background-color: #333; /* Fondo oscuro */
+  color: #fff; /* Texto blanco */
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  border-radius: 50px;
+/* Contenedor principal del navbar */
+.navbar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 15px 30px;
+  background-color: #333; /* Fondo oscuro */
+  color: #fff; /* Texto blanco */
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  border-radius: 10px;
+}
+
+/* Logo */
+.navbar-logo {
+  font-size: 1.5rem;
+  font-weight: bold;
+}
+
+.navbar-logo a {
+  text-decoration: none;
+  color: #fff;
+  transition: color 0.3s;
+}
+
+.navbar-logo a:hover {
+  color: #f0a500; /* Color resaltado */
+}
+
+/* Menú de navegación */
+.navbar-menu {
+  display: flex;
+  list-style: none;
+  gap: 20px;
+  margin: 0;
+  padding: 0;
+}
+
+.navbar-item {
+  font-size: 1rem;
+  display: flex;
+  align-items: center;
+}
+
+.navbar-link {
+  text-decoration: none;
+  color: #fff;
+  transition: color 0.3s;
+  padding: 5px 10px;
+  border-radius: 5px;
+}
+
+.navbar-link:hover {
+  color: #f0a500;
+  background-color: rgba(255, 255, 255, 0.1); /* Fondo al pasar el mouse */
+}
+
+.navbar-user {
+  margin-right: 10px;
+  font-size: 1rem;
+  color: #ccc; /* Texto gris claro */
+}
+
+.navbar-logout {
+  background: none;
+  border: none;
+  color: #f0a500;
+  cursor: pointer;
+  padding: 5px 10px;
+  border-radius: 5px;
+  font-size: 1rem;
+  transition: background-color 0.3s;
+}
+
+.navbar-logout:hover {
+  background-color: rgba(255, 255, 255, 0.1);
+}
+
+}
+
+/* Estilo del logo */
+.navbar-logo {
+  font-size: 1.5rem;
+  font-weight: bold;
+}
+
+.navbar-logo a {
+  text-decoration: none;
+  color: #fff;
+  transition: color 0.3s;
+}
+
+.navbar-logo a:hover {
+  color: #f0a500; /* Color resaltado */
+}
+
+/* Menú de navegación */
+.navbar-menu {
+  display: flex;
+  list-style: none;
+  gap: 20px;
+  margin: 0;
+  padding: 0;
+}
+
+.navbar-item {
+  font-size: 1rem;
+}
+
+.navbar-link {
+  text-decoration: none;
+  color: #fff;
+  transition: color 0.3s;
+  padding: 5px 10px;
+  border-radius: 5px;
+}
+
+.navbar-link:hover {
+  color: #f0a500; /* Color resaltado */
+  background-color: rgba(255, 255, 255, 0.1); /* Fondo al pasar el mouse */
+}
