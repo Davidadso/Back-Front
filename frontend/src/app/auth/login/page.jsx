@@ -11,9 +11,8 @@ function LoginPage() {
             <CardTitle>Iniciar Sesión</CardTitle>
           </CardHeader>
           <CardContent>
-            <LoginForm />
+           <LoginForm/>
           </CardContent>
-          
         </Card>
       </div>
     </>

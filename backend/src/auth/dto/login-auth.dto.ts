@@ -18,5 +18,5 @@ export class LoginDto {
 
     @MinLength(1)
     @IsNumber()
-    id_rol: number;  
+    idRol: number;  
 }

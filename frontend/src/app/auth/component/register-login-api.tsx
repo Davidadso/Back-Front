@@ -13,7 +13,11 @@ export async function registerUser(userData: any) {
     const data = await res.json();
 
     if (res.ok) {
-      return data; 
+      if(data.token){
+        localStorage.setItem("token", data.token);
+        localStorage.setItem("userName", data.userName);
+      }
+      return data;
     } else {
       throw new Error(data.message || "Error en el registro");
     }

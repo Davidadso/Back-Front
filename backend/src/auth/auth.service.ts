@@ -18,24 +18,39 @@ export class AuthService {
     private readonly jwtService: JwtService,
   ) {}
 
-  async register({ userName, email, password, id_rol }: RegisterDto) {
+  async register({ userName, email, password, idRol }: RegisterDto) {
     const user = await this.usersService.findOneByEmail(email);
     if (user) {
       throw new BadRequestException('User already exists');
     }
 
-    if (!id_rol) {
-      id_rol = 2;
+    if (!idRol) {
+      idRol = 2;
     }
 
     try {
-      const hashedPassword = bcryptjs.hashSync(password, 10);
-      return await this.usersService.create({
-        userName,
-        email,
-        id_rol,
-        password: hashedPassword,
-      });
+        const hashedPassword = bcryptjs.hashSync(password, 10);
+    const newUser = await this.usersService.create({
+      userName,
+      email,
+      idRol,
+      password: hashedPassword,
+    });
+
+    // Genera el token
+    const payload = {
+      email: newUser.email,
+      userName: newUser.userName,
+      id_rol: newUser.idRol,
+    };
+    const token = await this.jwtService.signAsync(payload);
+
+    // Devuelve el token y el nombre del usuario
+    return {
+      message: 'User registered successfully',
+      userName: newUser.userName,
+      token,
+    };
     } catch (error) {
       console.error(error);
       throw new InternalServerErrorException('Error al registrar el usuario');
@@ -55,7 +70,7 @@ export class AuthService {
     const payload = {
       email: user.email,
       userName: user.userName,
-      id_rol: user.id_rol,
+      idRol: user.idRol,
       password: user.password,
     };
 

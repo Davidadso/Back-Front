@@ -1,5 +1,5 @@
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
-import { RegisterForm} from "./register-form"
+import  {RegisterForm} from "./register-form"
 
 import React from "react";
 
@@ -9,7 +9,7 @@ function HomePage() {
       <div className="h-screen flex justify-center items-center">
         <Card>
           <CardHeader>
-            <CardTitle>Login</CardTitle>
+            <CardTitle>Register</CardTitle>
           </CardHeader>
           <CardContent>
           <RegisterForm/>

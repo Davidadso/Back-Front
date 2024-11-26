@@ -14,7 +14,6 @@ const NavbarComponents = () => {
   }, []);
 
   const handleLogout = () => {
-    // Eliminar el token y datos del usuario
     localStorage.removeItem("token");
     localStorage.removeItem("userName");
     setUserName(null);

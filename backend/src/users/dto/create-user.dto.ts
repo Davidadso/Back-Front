@@ -11,6 +11,6 @@ export class CreateUserDto {
   password: string;
 
   @IsInt()
-  id_rol: number;  
+  idRol: number;  
 }
 3

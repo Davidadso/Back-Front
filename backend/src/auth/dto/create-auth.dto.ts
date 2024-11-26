@@ -18,5 +18,5 @@ export class RegisterDto {
   
     @MinLength(1)
     @IsNumber()
-    id_rol: number;  
+    idRol: number;  
 }

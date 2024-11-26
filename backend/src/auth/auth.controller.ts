@@ -12,7 +12,7 @@ import { ActiveUser } from 'src/common/decorators/active-user.decorator';
 interface RequestWithUser extends Request {
   user: {
     email: string;
-    id_rol: number;
+    idRol: number;
   };
 }
 

@@ -2,7 +2,7 @@ export const BACKEND_URL = process.env.NEXT_PUBLIC_BACKEND_URL;
 
 export async function createCategories(categoriesData: any) {
   try {
-    const res = await fetch(`${BACKEND_URL}/api/categories`, {
+    const res = await fetch(`${BACKEND_URL}/categories`, {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
@@ -19,7 +19,7 @@ export async function createCategories(categoriesData: any) {
 
 export async function getCategories(): Promise<any> {
   try {
-    const data = await fetch(`${BACKEND_URL}/api/categories`, {
+    const data = await fetch(`${BACKEND_URL}/categories`, {
       cache: "no-store",
     });
     return await data.json();
@@ -31,7 +31,7 @@ export async function getCategories(): Promise<any> {
 
 export async function getCategoric(id: string) {
   try {
-    const data = await fetch(`${BACKEND_URL}/api/categories/${id}`, {
+    const data = await fetch(`${BACKEND_URL}/categories/${id}`, {
       cache: "no-store",
     });
     return await data.json();
@@ -42,14 +42,14 @@ export async function getCategoric(id: string) {
 }
 
 export async function deleteCategories(id: string) {
-  const res = await fetch(`${BACKEND_URL}/api/categories/${id}`, {
+  const res = await fetch(`${BACKEND_URL}/categories/${id}`, {
     method: "DELETE",
   });
   return await res.json();
 }
 
 export async function updateCategories(id: string, newCategories: any) {
-  const res = await fetch(`${BACKEND_URL}/api/categories/${id}`, {
+  const res = await fetch(`${BACKEND_URL}/categories/${id}`, {
     method: "PATCH",
     headers: {
       "Content-Type": "application/json",

@@ -1,33 +1,36 @@
-import { Injectable, NotFoundException } from '@nestjs/common';
+import { Injectable, InternalServerErrorException, NotFoundException } from '@nestjs/common';
 import { CreateUserDto } from './dto/create-user.dto';
 import { UpdateUserDto } from './dto/update-user.dto';
 import { PrismaService } from 'src/prisma/prisma.service';
+import { User } from '@prisma/client';
 @Injectable()
 export class UsersService {
   constructor(private prismaService: PrismaService) {}
 
   async create(createUserDto: CreateUserDto) {
     try {
-      const createUsers = await this.prismaService.user.create({
+      const createdUser = await this.prismaService.user.create({
         data: createUserDto,
       });
-      if (!createUsers) {
+  
+      if (!createdUser) {
         throw new Error('Error creating user');
-      } else {
-        return createUsers;
       }
+  
+      return createdUser;
     } catch (error) {
       console.error(error);
-      return { message: 'Error creating user', errors: [] };
+      throw new InternalServerErrorException('Error creating user');
     }
   }
   
-  async findOneByEmail(email: string): Promise<CreateUserDto | null> {
-    const user = await this.prismaService.user.findUnique({
+  
+  async findOneByEmail(email: string): Promise<User | null> {
+    return await this.prismaService.user.findUnique({
       where: { email },
     });
-    return user;
   }
+  
 
   async findOneByEmailWithPassword(email: string): Promise<CreateUserDto | null> {
     return this.prismaService.user.findUnique({
