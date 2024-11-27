@@ -56,11 +56,6 @@ async function HomePage() {
   return (
     <>
       <div className="flex">
-        {/* Sidebar */}
-        <div className="flex items-left h-screen">
-          <SheetDemo />
-        </div>
-
         {/* Main Content */}
         <div className="flex-1 p-4">
           {/* Header */}

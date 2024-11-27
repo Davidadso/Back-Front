@@ -1,69 +1,223 @@
+/* Navbar general */
 .navbar {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  padding: 15px 30px;
   background-color: #333;
-  color: #fff;
-  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-  border-radius: 10px;
+  padding: 10px 20px;
+  color: white;
+  position: relative;
 }
 
-.navbar-logo {
-  font-size: 1.5rem;
-  font-weight: bold;
-}
-
-.navbar-logo a {
+.navbar-logo a, .navbar-link {
+  color: white;
   text-decoration: none;
-  color: #fff;
-  transition: color 0.3s;
-}
-
-.navbar-logo a:hover {
-  color: #f0a500;
+  font-size: 18px;
+  font-weight: bold;
 }
 
 .navbar-menu {
   display: flex;
-  list-style: none;
-  gap: 20px;
+  list-style-type: none;
   margin: 0;
   padding: 0;
 }
 
 .navbar-item {
-  font-size: 1rem;
+  margin: 0 15px;
+  display: flex;
+  align-items: center;
 }
 
-.navbar-link {
-  text-decoration: none;
-  color: #fff;
-  transition: color 0.3s;
+/* Estilo para los enlaces */
+.navbar-item a {
+  color: white;
+  font-size: 16px;
   padding: 5px 10px;
-  border-radius: 5px;
-}
-
-.navbar-link:hover {
-  color: #f0a500;
-  background-color: rgba(255, 255, 255, 0.1);
-}
-
-.navbar-user {
-  font-weight: bold;
-  color: #ccc;
-}
-
-.navbar-logout {
-  background: none;
-  border: none;
-  color: #f0a500;
-  cursor: pointer;
-  padding: 5px 10px;
-  border-radius: 5px;
   transition: background-color 0.3s;
 }
 
-.navbar-logout:hover {
-  background-color: rgba(255, 255, 255, 0.1);
+.navbar-item a:hover {
+  background-color: #555;
+  border-radius: 4px;
+}
+
+/* Estilos para los botones, incluyendo el icono de configuración */
+.navbar-item button {
+  background: none;
+  border: none;
+  color: white;
+  font-size: 16px;
+  cursor: pointer;
+}
+
+.navbar-item button:hover {
+  text-decoration: underline;
+}
+
+.settings-icon, .cart-icon {
+  font-size: 20px;
+  cursor: pointer;
+  transition: transform 0.3s;
+  margin-right: 10px; /* Espaciado entre el ícono y los elementos adyacentes */
+}
+
+/* Efecto de zoom en el ícono */
+.settings-icon:hover, .cart-icon:hover {
+  transform: scale(1.2); /* Aumentar el tamaño del ícono al hacer hover */
+}
+
+/* Menú desplegable del carrito */
+.dropdown {
+  position: relative;
+}
+
+.dropdown-menu {
+  display: none;
+  position: absolute;
+  top: 100%;
+  right: 0;
+  background-color: #444;
+  border-radius: 5px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
+  z-index: 10;
+  min-width: 250px;
+  padding: 10px;
+  transition: opacity 0.2s ease;
+}
+
+.dropdown:hover .dropdown-menu {
+  display: block;
+  opacity: 1;
+}
+
+.dropdown-menu ul {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.dropdown-menu ul li {
+  padding: 8px;
+  color: white;
+  cursor: pointer;
+}
+
+.dropdown-menu ul li:hover {
+  background-color: #555;
+  border-radius: 4px;
+}
+
+/* Para el enlace "Ver carrito" */
+.dropdown-menu ul li:last-child {
+  color: red;  /* Para el enlace de "Ver carrito" */
+}
+
+.dropdown-menu ul li:last-child:hover {
+  background-color: #555;
+  border-radius: 4px;
+}
+
+/* Menú de categorías */
+.dropdown-content {
+  display: none;
+  position: absolute;
+  top: 100%;
+  left: 0;
+  background-color: #444;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
+  padding: 10px;
+  min-width: 150px;
+}
+
+.dropdown:hover .dropdown-content {
+  display: block;
+}
+
+.dropdown-content ul {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.dropdown-content ul li {
+  padding: 10px;
+  cursor: pointer;
+}
+
+.dropdown-content ul li:hover {
+  background-color: #555;
+}
+
+/* Menú desplegable de configuración */
+.dropdown-menu {
+  display: none;
+  position: absolute;
+  top: 100%;
+  right: 0;
+  background-color: #444;
+  border-radius: 5px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
+  z-index: 10;
+  min-width: 200px;
+  padding: 10px;
+}
+
+.dropdown-menu ul {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.dropdown-menu ul li {
+  padding: 8px;
+  color: white;
+}
+
+.dropdown-menu ul li:hover {
+  background-color: #555;
+}
+
+.dropdown-menu ul li:last-child {
+  color: red;  /* Para el enlace de Cerrar sesión */
+}
+
+.dropdown-menu ul li:last-child:hover {
+  background-color: #555;
+}
+
+/* Configuración: Mostrar el menú al pasar el cursor sobre el ícono */
+.dropdown:hover .dropdown-menu {
+  display: block;
+  opacity: 1;
+}
+
+/* Responsividad */
+@media (max-width: 768px) {
+  .navbar {
+    flex-direction: column;
+    padding: 20px;
+  }
+
+  .navbar-menu {
+    flex-direction: column;
+    width: 100%;
+    margin-top: 20px;
+  }
+
+  .navbar-item {
+    margin: 10px 0;
+  }
+
+  .navbar-item a {
+    font-size: 18px;
+    padding: 10px;
+    width: 100%;
+    text-align: center;
+  }
+
+  .dropdown-content,
+  .dropdown-menu {
+    min-width: 100%;
+  }
 }

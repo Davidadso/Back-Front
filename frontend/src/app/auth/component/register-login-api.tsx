@@ -38,9 +38,24 @@ export async function loginUser(credentials: any) {
     });
 
     const data = await res.json();
+    console.log("Login Response Data:", data); // Ver los datos que recibes del backend
 
     if (res.ok) {
-      return data; 
+      if (data.token) {
+        // Guarda el token en localStorage
+        console.log("Guardando el token:", data.token);
+        localStorage.setItem("token", data.token);
+
+        // Si el userName está en la respuesta del login, guardarlo también
+        if (data.userName) {
+          console.log("Guardando el userName:", data.userName);
+          localStorage.setItem("userName", data.userName);
+        }
+        
+        return data;
+      } else {
+        throw new Error("Token no encontrado en la respuesta");
+      }
     } else {
       throw new Error(data.message || "Credenciales incorrectas");
     }
@@ -49,3 +64,6 @@ export async function loginUser(credentials: any) {
     throw new Error(error.message || "Hubo un problema con la solicitud");
   }
 }
+
+
+

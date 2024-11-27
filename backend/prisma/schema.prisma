@@ -59,7 +59,7 @@ model User {
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
   idRol    Int
-  rol       Rol      @relation(fields: [idRol], references: [id], name: "userRole") // Relación 1 a m
+  rol       Rol      @relation(fields: [idRol], references: [id], name: "userRole") 
 }
 
 model Rol {

@@ -42,15 +42,7 @@ export class AuthController {
     return this.authService.login(loginDto);
   }
 
-  /* @Get('profile')
-  @Roles(1)
-  @UseGuards(AuthGuard, RolesGuard)
-  profile(@Req() req: Request & { user: { email: string; id_rol: number } }) {
-    return this.authService.profile({
-      email: req.user.email,
-      id_rol: req.user.id_rol,
-    });
-  } */
+ 
 
   @Get('profile')
   @Auth([1 ,2 ,3])

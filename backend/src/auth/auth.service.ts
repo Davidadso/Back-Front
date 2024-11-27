@@ -79,10 +79,11 @@ export class AuthService {
     return {
       token,
       email,
+      userName: user.userName,
     };
   }
 
-  async profile({ email, id_rol }: { email: string; id_rol: number }) {
+  async profile({ email, idRol }: { email: string; idRol: number }) {
     /* if (id_rol == 2) {
       throw new UnauthorizedException(
         'You are not authorized to access this route',

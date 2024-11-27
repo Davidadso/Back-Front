@@ -20,11 +20,11 @@ export function LoginForm() {
     try {
       const userData = await loginUser(data);
 
-      // Guardar token en localStorage
+     
       localStorage.setItem("token", userData.token);
       localStorage.setItem("userName", userData.userName);
 
-      // Redirigir al inicio o dashboard
+      
       router.push("/");
     } catch (error) {
       setError(error.message || "Error al iniciar sesión");
