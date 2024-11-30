@@ -1,38 +1,34 @@
 "use client";
 import { useEffect, useState } from "react";
 import Link from "next/link";
-import { FaCog, FaShoppingCart } from "react-icons/fa"; // Importando los íconos de la tuerca y el carrito
+import { FaCog, FaShoppingCart } from "react-icons/fa";
 import "./NavbarComponents.css";
 import { SheetDemo } from "./sidebar-components";
 
 const NavbarComponents = () => {
   const [userName, setUserName] = useState<string | null>(null);
-  const [cartItems, setCartItems] = useState<any[]>([]); // Para manejar los elementos del carrito
+  const [cartItems, setCartItems] = useState<any[]>([]);
 
-  // Cargar usuario y productos del carrito desde localStorage
   useEffect(() => {
     const storedUserName = localStorage.getItem("userName");
     if (storedUserName) {
       setUserName(storedUserName);
     }
 
-    const storedCartItems = JSON.parse(localStorage.getItem("cartItems") || "[]");
+    const storedCartItems = JSON.parse(
+      localStorage.getItem("cartItems") || "[]"
+    );
     setCartItems(storedCartItems);
 
-    // Escuchar cambios en localStorage
     const handleStorageChange = () => {
-      const updatedUserName = localStorage.getItem("userName");
-      if (updatedUserName) {
-        setUserName(updatedUserName);
-      } else {
-        setUserName(null);
-      }
-
-      const updatedCartItems = JSON.parse(localStorage.getItem("cartItems") || "[]");
+      const updatedCartItems = JSON.parse(
+        localStorage.getItem("cartItems") || "[]"
+      );
       setCartItems(updatedCartItems);
     };
 
     window.addEventListener("storage", handleStorageChange);
+    
     return () => window.removeEventListener("storage", handleStorageChange);
   }, []);
 
@@ -40,6 +36,11 @@ const NavbarComponents = () => {
     localStorage.removeItem("token");
     localStorage.removeItem("userName");
     setUserName(null);
+  };
+
+  const handleCartUpdate = (updatedCartItems: any[]) => {
+    setCartItems(updatedCartItems);
+    localStorage.setItem("cartItems", JSON.stringify(updatedCartItems));
   };
 
   return (
@@ -50,7 +51,9 @@ const NavbarComponents = () => {
         </div>
         <ul className="navbar-menu">
           <li className="navbar-item">
-            <Link className="navbar-link" href="/products">Catalogo</Link>
+            <Link className="navbar-link" href="/products">
+              Catálogo
+            </Link>
           </li>
           <li className="navbar-item">
             <div className="dropdown">
@@ -72,7 +75,7 @@ const NavbarComponents = () => {
           </li>
           {userName ? (
             <>
-              <li className="navbar-item">Bienvenido, {userName}</li>
+              <li className="navbar-item">{userName}</li>
               <li className="navbar-item">
                 <div className="dropdown">
                   <FaCog className="settings-icon" />
@@ -88,23 +91,25 @@ const NavbarComponents = () => {
             </>
           ) : (
             <li className="navbar-item">
-              <Link className="navbar-link" href="/auth/login">Iniciar Sesión</Link>
+              <Link className="navbar-link" href="/auth/login">
+                Iniciar Sesión
+              </Link>
             </li>
           )}
           <li className="navbar-item">
             <div className="dropdown">
               <FaShoppingCart className="cart-icon" />
+              <span>
+                {cartItems.reduce((total, item) => total + item.quantity, 0)}
+              </span>{" "}
+              {/* Contador de productos */}
               <div className="dropdown-menu">
                 <ul>
-                  {cartItems.length > 0 ? (
-                    cartItems.map((item, index) => (
-                      <li key={index}>{item.name}</li> // Aquí muestras el nombre de los productos del carrito
-                    ))
-                  ) : (
-                    <li>No hay productos en el carrito</li>
-                  )}
-                  <li><Link href="/cart">Ver carrito</Link></li>
-                  <li><SheetDemo /></li>
+                  <li>
+                    <Link href="/cart">Ver carrito</Link>
+                  </li>
+                  {/* Aquí pasamos cartItems al componente SheetDemo */}
+                  <SheetDemo cartItems={cartItems} />
                 </ul>
               </div>
             </div>

@@ -1,6 +1,5 @@
 import Link from "next/link";
 import { buttonVariants } from "@/components/ui/button";
-import { SheetDemo } from "@/components/sidebar-components";
 import * as React from "react";
 import {
   Carousel,
@@ -12,9 +11,11 @@ import {
 import { getProducts } from "./products/products.api";
 import { getCategoric } from "@/app/categories/categories.api";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
-import NavbarComponents from "@/components/navbar-components";
-
+import FooterComponent from "@/components/footer-components";
+import HeaderComponents from "../components/header-components";
 export const dynamic = "force-dynamic";
+import { ProductCard } from "../components/productscard";
+import { UserDto } from "./products/dto/create-product.dto";
 
 async function HomePage() {
   const productos = await getProducts();
@@ -24,7 +25,7 @@ async function HomePage() {
     const categoric = await getCategoric(producto.categoryId);
     return (
       <CarouselItem key={producto.id}>
-        <div className="flex justify-center items-center h-screen">
+        <div className="flex justify-center items-center ">
           <Card className="bg-black border border-blue-500 text-white shadow-lg transition-transform transform hover:scale-105">
             <CardHeader>
               <CardTitle className="flex justify-between items-center">
@@ -38,7 +39,7 @@ async function HomePage() {
               <img
                 src={producto.image}
                 alt={producto.name}
-                className="w-full h-64 object-cover mb-4"
+                className="w-64 h-48 object-cover mb-4"
               />
               <h2 className="font-semibold mb-1">
                 <b>Cuantos:</b> {producto.stock}
@@ -59,25 +60,24 @@ async function HomePage() {
         {/* Main Content */}
         <div className="flex-1 p-4">
           {/* Header */}
-          <div className="flex justify-between mb-4">
-            <h1 className="text-4xl font-bold">NextNestApp</h1>
-            <NavbarComponents />
-          </div>
-
+          <HeaderComponents />
           {/* Products Section */}
-          <div className="bg-black rounded-lg p-6">
-            <div className="flex justify-center mt-12 mb-6">
-              <h1 className="text-4xl text-white font-bold">Productos</h1>
-            </div>
-            <Carousel>
-              <CarouselContent>
-                {await Promise.all(productos.map(renderProductCard))}
-              </CarouselContent>
-              <CarouselPrevious />
-              <CarouselNext />
-            </Carousel>
+          <div className="bg-white rounded-lg p-6 border-">
           </div>
         </div>
+      </div>
+      <div>
+        <div className="flex justify-center mt-12 mb-6">
+          <h1 className="text-4xl text-black font-bold">Productos</h1>
+        </div>
+        <div className="grid sm:grid-cols-2 md:grid-cols-3 xl:grid-cols-4 gap-3">
+          {productos.map((product: UserDto) => (
+            <ProductCard product={product} key={product.id} />
+          ))}
+        </div>
+      </div>
+      <div>
+        <FooterComponent />
       </div>
     </>
   );

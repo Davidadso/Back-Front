@@ -1,0 +1,33 @@
+/* Estilos para el footer */
+.footer {
+    background-color: black;
+    color: white;
+    padding: 20px;
+    text-align: center;
+  }
+  
+  .footer-content {
+    max-width: 1200px;
+    margin: 0 auto;
+  }
+  
+  .footer-text {
+    margin: 0;
+    font-size: 14px;
+  }
+  
+  .footer-links {
+    margin-top: 10px;
+  }
+  
+  .footer-link {
+    color: red;
+    text-decoration: none;
+    margin: 0 15px;
+    font-size: 16px;
+  }
+  
+  .footer-link:hover {
+    text-decoration: underline;
+  }
+  
